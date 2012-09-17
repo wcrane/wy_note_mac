@@ -2,8 +2,8 @@
 //  HANoteEngine.m
 //  NeverNote2
 //
-//  Created by wcrane on 9/11/12.
-//  Copyright (c) 2012 HappyApp小分队. All rights reserved.
+//  Created by admin on 9/7/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "HANoteEngine.h"
@@ -202,21 +202,18 @@ static HANoteEngine *sharedInstance = nil;
     [dataFetcher start];
 }
 
-//获取用户信息
 - (void)asyncGetUserInfo
 {
     OAMutableURLRequest *request = [self _getAccessRequestURL:kUserInfoGetURL method:@"GET" params:nil];
     [self _startAsyncRequest:request];
 }
 
-//获取全部笔记本
 - (void)asyncNoteBookAll
 {
     OAMutableURLRequest *request = [self _getAccessRequestURL:kNoteBookAllURL method:@"POST" params:nil];
     [self _startAsyncRequest:request];
 }
 
-//获取笔记本中的笔记列表(根据api，只有id，因此需要再调用get note接口才能获取比较信息，比较烂。网易有另外一份mapi的接口，可以在网上找到php版的，应该是网页版使用的)
 - (void)asyncNoteBookList:(HANoteBook *)notebook
 {
     OAMutableURLRequest *request = [self _getAccessRequestURL:kNoteBookListURL method:@"POST" params:[NSDictionary dictionaryWithObjectsAndKeys:notebook.path, @"notebook", nil]];

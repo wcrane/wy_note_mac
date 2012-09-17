@@ -2,8 +2,8 @@
 //  HAAppDelegate.m
 //  NeverNote2
 //
-//  Created by wcrane on 9/11/12.
-//  Copyright (c) 2012 HappyApp小分队. All rights reserved.
+//  Created by admin on 9/7/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "HAAppDelegate.h"
@@ -108,6 +108,7 @@
 {
     DLog(@"Click Account...");
     
+    //第一步，获取OAuth 1.0的Request Token，使用的同步请求
     [_engine syncRequestToken];
     
 //    NSString *queryURL = [NSString stringWithFormat:@"%@?oauth_token=%@", kOAuthAuthorizeURL, _engine.requestToken.key];
@@ -118,6 +119,7 @@
     self.popover = [[NSPopover alloc] init];
     _popover.delegate = self;
     
+    //第二步，使用上一步获取的Request Token请求Access Token，展示登陆页面
     self.loginCtrl = [[[HALoginViewController alloc] initWithNibName:@"HALoginViewController" bundle:nil] autorelease];
     self.loginCtrl.delegate = self;
     
@@ -133,18 +135,22 @@
     NSString *queryURL = [NSString stringWithFormat:@"%@?oauth_token=%@", kOAuthAuthorizeURL, _engine.requestToken.key];
 //    DLog(@"queryURL: %@", queryURL);
     
+    //第二步的请求开始
     [_loginCtrl showLoginView:queryURL];
 }
 
 - (void)didLogin:(HALoginViewController *)loginCtrl withVerifier:(NSString *)oauth_verifier
 {
+    //获取服务器返回的验证信息获取Access Token
     if (oauth_verifier) {
         DLog(@"verifier: %@", oauth_verifier);
         
         self.engine.requestToken.verifier = oauth_verifier;
         
+        //第三步，真正的获取Access　Token的一步，同步请求
         [self.engine syncAccessToken];
         
+        //以后的步骤，用Access Token获取服务器上的资源，没有检查是否获取成功，直接获取用户信息（或有问题的）
         [self.engine asyncGetUserInfo];
         
         [self loadData];

@@ -3,7 +3,7 @@
 //  TouchTheFireEagle
 //
 //  Created by Jonathan Wight on 04/04/08.
-//  Copyright 2008 HappyApp小分队. All rights reserved.
+//  Copyright 2008 __MyCompanyName__. All rights reserved.
 //
 
 #import "OAToken.h"

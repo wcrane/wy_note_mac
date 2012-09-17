@@ -2,8 +2,8 @@
 //  HALoginViewController.m
 //  NeverNote2
 //
-//  Created by wcrane on 9/10/12.
-//  Copyright (c) 2012 HappyApp小分队. All rights reserved.
+//  Created by admin on 9/10/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "HALoginViewController.h"
